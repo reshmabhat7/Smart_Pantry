@@ -28,7 +28,7 @@ input[type="text"] {
     border: 1px solid #ccc;
 }
 
-input[type="submit"] {
+input[type="submit"], a {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -37,8 +37,18 @@ input[type="submit"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
 }
 
+.chart-img {
+    width: 100%;
+    max-width: 650px;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
 a {
     display: inline-block;
     margin-top: 20px;
@@ -46,20 +56,6 @@ a {
     text-decoration: none;
     color: white;
     background: #2e6f95;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 5px;
-}
-
-.highlight {
-    background-color: #ffff66;  /* yellow like a marker */
-    font-weight: bold;
-    color: black;
-    padding: 2px 4px;
-    border-radius: 3px;
-}
-mark {
-    background-color: yellow;
-    font-weight: bold;
-    padding: 2px 4px;
-    border-radius: 4px;
 }

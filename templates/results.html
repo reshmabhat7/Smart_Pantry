@@ -10,7 +10,7 @@
         {% for name, ingredients in recipes %}
             <div class="recipe">
                 <h3>{{ name }}</h3>
-                <p><b>Ingredients:</b> {{ ingredients }}</p>
+                <p><b>Ingredients:</b> {{ ingredients|safe }}</p>
             </div>
         {% endfor %}
         {% if recipes|length == 0 %}

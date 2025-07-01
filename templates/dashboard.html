@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Pantry Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>📊 Smart Pantry Dashboard</h2>
+        <p>Here are the top 10 most used ingredients across all recipes:</p>
+
+        {% if chart_data %}
+            <img src="data:image/png;base64,{{ chart_data }}" alt="Top Ingredients Chart" class="chart-img">
+        {% else %}
+            <p>No data available to generate chart. Try adding or checking recipes.</p>
+        {% endif %}
+
+        <br>
+        <a href="{{ url_for('home') }}">← Back to Home</a>
+    </div>
+</body>
+</html>
