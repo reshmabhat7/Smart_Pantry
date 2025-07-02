@@ -51,3 +51,4 @@ def dashboard_r(app):
         plt.close()
 
         return render_template("dashboard.html", chart_data=image_base64)
+    

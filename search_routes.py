@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import request, render_template
 import sqlite3
 
 def register_search_routes(app):
@@ -7,11 +7,9 @@ def register_search_routes(app):
     def search():
         if request.method == "POST":
             ingredients_input = request.form["ingredients"]
-            input_list = [i.strip().lower() for i in ingredients_input.split(",") if i.strip()]
+            input_list = [i.strip().lower() for i in ingredients_input.split(",")]
 
-            if not input_list:
-                return render_template("results.html", recipes=[])
-
+            # Fetch recipes from the database
             conn = sqlite3.connect("recipes.db")
             cursor = conn.cursor()
             cursor.execute("SELECT Name, RecipeIngredientParts FROM recipes")
@@ -21,19 +19,21 @@ def register_search_routes(app):
             matches = []
             for name, ing in rows:
                 ing_lower = ing.lower()
-                clean_ing = (
-                    ing_lower.replace('c(', '')
-                             .replace(')', '')
-                             .replace('"', '')
-                             .replace("'", '')
-                )
-                ingredient_words = clean_ing.replace(',', '').split()
-                for word in input_list:
-                    clean_ing = clean_ing.replace(
-                        word, f"<mark>{word}</mark>"
-                    )
 
-                if all(word in ingredient_words for word in input_list):
+                # Support both old and new formats
+                if ing_lower.startswith("c("):
+                    clean_ing = ing_lower.replace('c(', '').replace(')', '').replace('"', '').replace("'", '')
+                else:
+                    clean_ing = ing_lower
+
+                # Check if all ingredients are present
+                if all(word in clean_ing for word in input_list):
+                    # Highlight each matched ingredient
+                    for word in input_list:
+                        clean_ing = clean_ing.replace(
+                            word, f"<mark>{word}</mark>"
+                        )
+
                     matches.append((name, clean_ing))
                     if len(matches) == 5:
                         break
