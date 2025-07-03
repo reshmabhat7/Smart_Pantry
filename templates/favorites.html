@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorites</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>⭐ Favorited Recipes</h2>
+        {% if favorites %}
+        <table border="1" cellpadding="10" cellspacing="0">
+            <tr>
+                <th>Name</th>
+                <th>Ingredients</th>
+                <th>Favorited At</th>
+            </tr>
+            {% for name, ingredients, created_at in favorites %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ ingredients }}</td>
+                <td>{{ created_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No favorite recipes yet.</p>
+        {% endif %}
+        <br>
+        <a href="{{ url_for('home') }}">← Back to Home</a>
+    </div>
+</body>
+</html>

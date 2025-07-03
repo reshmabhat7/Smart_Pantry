@@ -7,12 +7,13 @@
 <body>
     <div class="container">
         <h2>🔎 Found {{ recipes|length }} Recipe(s)</h2>
-        {% for name, ingredients in recipes %}
-            <div class="recipe">
-                <h3>{{ name }}</h3>
-                <p><b>Ingredients:</b> {{ ingredients|safe }}</p>
-            </div>
-        {% endfor %}
+        {% for recipe in recipes %}
+            {% set name, ingredients, id = recipe %}
+                <div class="recipe">
+                    <h3>{{ name }} <a href="/fav/{{ id }}">☆ Favorite</a></h3>
+                    <p><b>Ingredients:</b> {{ ingredients|safe }}</p>
+                 </div>
+            {% endfor %}
         {% if recipes|length == 0 %}
             <p>No recipes found. Try different ingredients.</p>
         {% endif %}

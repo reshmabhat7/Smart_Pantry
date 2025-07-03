@@ -12,12 +12,12 @@ def register_search_routes(app):
             # Fetch recipes from the database
             conn = sqlite3.connect("recipes.db")
             cursor = conn.cursor()
-            cursor.execute("SELECT Name, RecipeIngredientParts FROM recipes")
+            cursor.execute("SELECT RecipeId, Name, RecipeIngredientParts FROM recipes")
             rows = cursor.fetchall()
             conn.close()
 
             matches = []
-            for name, ing in rows:
+            for recipe_id, name, ing in rows:
                 ing_lower = ing.lower()
 
                 # Support both old and new formats
@@ -34,7 +34,7 @@ def register_search_routes(app):
                             word, f"<mark>{word}</mark>"
                         )
 
-                    matches.append((name, clean_ing))
+                    matches.append((name, clean_ing, recipe_id))
                     if len(matches) == 5:
                         break
 
