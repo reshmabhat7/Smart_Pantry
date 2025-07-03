@@ -107,8 +107,3 @@ Make sure `pytest` is installed.
 ---
 
 **Made with 💚 by Reshma Bhat – for learning, growth, and delicious possibilities!**
-
-```
-
----
-
