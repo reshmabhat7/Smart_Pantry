@@ -112,9 +112,3 @@ Make sure `pytest` is installed.
 
 ---
 
-📝 Paste this into your `README.md`  
-💾 Save the file  
-🚀 Push to GitHub
-
-Let me know if you’d like to add project badges or deploy this project live!
-```
